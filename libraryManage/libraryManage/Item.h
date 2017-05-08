@@ -2,7 +2,7 @@
 #include <string>
 class Item
 {
-private:
+protected:
 	std::string title;
 	std::string description;
 public:
