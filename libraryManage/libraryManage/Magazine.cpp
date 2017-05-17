@@ -11,3 +11,15 @@ Magazine::Magazine(std::string _title, std::string _description, std::string _pu
 Magazine::~Magazine()
 {
 }
+
+std::string Magazine::display()
+{
+	std::string output;
+	output += "Title: ";
+	output += title;
+	output += "Description: ";
+	output += description;
+	output += "Publisher: ";
+	output += publisher;
+	return output;
+}

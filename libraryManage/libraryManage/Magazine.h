@@ -9,5 +9,6 @@ public:
 	Magazine(std::string, std::string, std::string);
 	~Magazine();
 	std::string getPublisher() { return publisher; };
+	std::string display();
 };
 
