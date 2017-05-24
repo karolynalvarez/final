@@ -1,6 +1,8 @@
 #include <iostream>
 #include "Item.h"
 #include "Book.h"
+#include "Magazine.h"
+#include "Library.h"
 #include <memory>
 
 using namespace std;
