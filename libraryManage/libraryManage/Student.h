@@ -13,7 +13,7 @@ private:
 	std::queue<std::shared_ptr<Item>> bookQueue;
 	std::shared_ptr<Item> bookCheckedOut = NULL;
 public:
-	Student();
+	Student(std::string _name, int _id);
 	~Student();
 	void checkOut(std::shared_ptr<Item>);
 	void returnBook(std::shared_ptr<Item>);
