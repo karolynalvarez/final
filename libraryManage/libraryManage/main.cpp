@@ -17,24 +17,31 @@ void addToLibrary();
 
 int main() {
 	
-	cout << "Hello! This command line tool will allow you to create a collection of records using objects to store data. Lets get started!" << endl << endl;
-	auto library = make_shared<Library>("HOME");
-	cout << "Welcome to your new library:  "<< library->getLocationName() << endl;
-	cout << "\nLet's add a book and create a student..." << endl;
-	auto book1 = make_shared<Book>("1", "Description", "Some guy");
-	auto book2 = make_shared<Book>("2", "Description", "Some guy");
-	auto book3 = make_shared<Magazine>("3", "Description", "Some guy");
-	auto book4 = make_shared<Magazine>("4", "Description", "Some guy");
-	library->addItem(book1);
-	library->addItem(book2);
-	library->addItem(book3);
-	library->addItem(book4);
-	auto student = make_shared<Student>("Hector", 712);
-	auto student1 = make_shared<Student>("Karolyn", 1525);
-	library->addStudent(student);
-	library->addStudent(student1);
-	cout << "\n\nGreat we've made some books take a look: " << endl;
-	cout << library->displayAll() << endl;
+	char ch;
+	intro();
+	do
+	{
+		clrscr();
+		cout << "\n\n\n\tMAIN MENU";
+		cout << "\n\n\t01. BOOK ISSUE";
+		cout << "\n\n\t02. BOOK DEPOSIT";
+		cout << "\n\n\t03. ADMINISTRATOR MENU";
+		cout << "\n\n\t04. EXIT";
+		cout << "\n\n\tPlease Select Your Option (1-4) ";
+		ch = getche();
+		switch (ch)
+		{
+		case '1':clrscr();
+			book_issue();
+			break;
+		case '2':book_deposit();
+			break;
+		case '3':admin_menu();
+			break;
+		case '4':exit(0);
+		default:cout << "\a";
+		}
+	} while (ch != '4');
 	system("pause");
 	/*start()*/
 	return 0;

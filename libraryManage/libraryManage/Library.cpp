@@ -33,7 +33,7 @@ std::string Library::displayItems()
 {
 	std::string output = "\nALL ITEMS\n";
 	for (int x = 0; x < allItems.size(); x++) {
-		output += "\n\nITEM #:" + (std::to_string(x + 1));
+		output += "\n\nITEM #" + (std::to_string(x + 1));
 		output += allItems[x]->display();
 	}
 	return output;
