@@ -11,14 +11,28 @@ Student::~Student()
 {
 }
 
-void Student::checkOut(std::shared_ptr<Item>)
+void Student::checkOut(std::shared_ptr<Item> _item)
 {
+	bookQueue.push(_item);
+	bookHistory.push_back(_item);
+	bookCheckedOut = _item;
 }
 
-void Student::returnBook(std::shared_ptr<Item>)
+void Student::returnBook(std::shared_ptr<Item> _item)
 {
+	if (bookCheckedOut != NULL) {
+		bookQueue.pop();
+		bookCheckedOut = NULL;
+	} 
 }
 
 void Student::printBookHistory(std::vector<std::shared_ptr<Item>>)
 {
+}
+
+std::string Student::display()
+{
+	std::string output;
+	output += ("Name: " + name + "/nID: " + std::to_string(id));
+	return output;
 }

@@ -14,6 +14,10 @@ public:
 	~Library();
 	void addStudent(std::shared_ptr<Student>);
 	void addItem(std::shared_ptr<Item>);
+	std::string displayAll();
+	std::string displayItems();
+	std::string displayStudents();
+
 	void printBookList();
 };
 
