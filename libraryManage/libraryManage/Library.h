@@ -17,6 +17,7 @@ public:
 	std::string displayAll();
 	std::string displayItems();
 	std::string displayStudents();
+	std::string getLocationName() { return locationName; };
 
 	void printBookList();
 };

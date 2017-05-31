@@ -13,13 +13,13 @@ void addToLibrary();
 */
 
 int main() {
+	/*
 	cout << "Hello! This command line tool will allow you to create a collection of records using objects to store data. Lets get started!" << endl << endl;
 	auto book = make_shared<Book>("Title", "Description", "Some guy");
 	cout << book->getTitle() << endl << book->getDescription() << endl << book->getAuthor();
-
 	auto library = make_shared<Library>("HOME");
-	cout << "Welcome to your new library:  "<< library->display() << endl;
-	cout << "Let's add a book and create a student..." << endl;
+	cout << "Welcome to your new library:  "<< library->getLocationName() << endl;
+	cout << "/nLet's add a book and create a student..." << endl;
 	auto book1 = make_shared<Book>("1", "Description", "Some guy");
 	auto book2 = make_shared<Book>("2", "Description", "Some guy");
 	auto book3 = make_shared<Magazine>("3", "Description", "Some guy");
@@ -31,10 +31,10 @@ int main() {
 	auto student = make_shared<Student>("Hector", 712);
 	library->addStudent(student);
 	cout << "Great we've made some books take a look: " << endl;
-	
-	
+	cout << "/n" << library->displayItems() << endl;
+	cout << "/n And here is a student..." << library->displayStudents() << endl;
 	system("pause");
-	/*start();*/
+	start();*/
 	return 0;
 }
 /*
