@@ -24,19 +24,30 @@ void Library::addItem(std::shared_ptr<Item> _item)
 std::string Library::displayAll()
 { 
 	std::string output = "Welcome to your library: " + locationName;
-	output += "/n
+	output += this->displayItems();
+	output += this->displayStudents();
+	return output;
 }
 
 std::string Library::displayItems()
 {
 	std::string output = "ALL ITEMS /n";
-	for (auto _items : allItems) {
-		output += "ITEM /n";
-		output += "Title: " + _items->getTitle();
-		output += "/nDescription: " + _items->getDescription();
-		return output;
+	for (int x = 0; x < allItems.size(); x++) {
+		output += ("/nITEM #" + std::to_string((x + 1)) + "/n" );
+		output += ("Title: " + allItems[x]->getTitle());
+		output += ("/nDescription: " + allItems[x]->getDescription());
 	}
+	return output;
+}
 
+std::string Library::displayStudents()
+{
+	std::string output = "ALL STUDENTS /n";
+	for (int x = 0; x < allStudents.size(); x++) {
+		output += ("STUDENT ID:" + std::to_string(allStudents[x]->getId()) + "/n");
+		output += ("/nName: " + allStudents[x]->getName());
+	}
+	return output;
 }
 
 void Library::printBookList()

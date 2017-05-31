@@ -18,6 +18,7 @@ public:
 	void checkOut(std::shared_ptr<Item>);
 	void returnBook(std::shared_ptr<Item>);
 	void printBookHistory(std::vector<std::shared_ptr<Item>>);
-	std::string display();
+	std::string getName() { return name; };
+	int getId() { return id; };
 };
 
