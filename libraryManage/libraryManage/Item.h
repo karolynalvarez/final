@@ -8,7 +8,6 @@ protected:
 public:
 	Item(std::string, std::string);
 	~Item();
-	std::string getTitle() {return title;}
-	std::string getDescription() {return description;}
+	virtual std::string display();
 };
 

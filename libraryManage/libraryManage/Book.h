@@ -8,7 +8,6 @@ private:
 	std::string author;
 public:
 	Book(std::string, std::string, std::string);
-	std::string getAuthor() { return author; };
 	std::string display();
 	~Book();
 };

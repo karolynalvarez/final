@@ -29,3 +29,9 @@ void Student::returnBook(std::shared_ptr<Item> _item)
 void Student::printBookHistory(std::vector<std::shared_ptr<Item>>)
 {
 }
+
+std::string Student::display()
+{
+	std::string output = (("\nID: " + std::to_string(id)) + ("\nSTUDENT NAME:" + name + "\n"));
+	return output;
+}

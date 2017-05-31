@@ -31,21 +31,19 @@ std::string Library::displayAll()
 
 std::string Library::displayItems()
 {
-	std::string output = "ALL ITEMS /n";
+	std::string output = "\nALL ITEMS\n";
 	for (int x = 0; x < allItems.size(); x++) {
-		output += ("/nITEM #" + std::to_string((x + 1)) + "/n" );
-		output += ("Title: " + allItems[x]->getTitle());
-		output += ("/nDescription: " + allItems[x]->getDescription());
+		output += "\n\nITEM #:" + (std::to_string(x + 1));
+		output += allItems[x]->display();
 	}
 	return output;
 }
 
 std::string Library::displayStudents()
 {
-	std::string output = "ALL STUDENTS /n";
+	std::string output = "ALL STUDENTS \n";
 	for (int x = 0; x < allStudents.size(); x++) {
-		output += ("STUDENT ID:" + std::to_string(allStudents[x]->getId()) + "/n");
-		output += ("/nName: " + allStudents[x]->getName());
+		output += allStudents[x]->display();
 	}
 	return output;
 }

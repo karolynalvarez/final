@@ -1,10 +1,13 @@
 #include <iostream>
+
 #include "Library.h"
 #include "Item.h"
 #include "Student.h"
 #include "Magazine.h"
 #include "Book.h"
 #include <memory>
+
+
 
 using namespace std;
 /*
@@ -13,13 +16,11 @@ void addToLibrary();
 */
 
 int main() {
-	/*
+	
 	cout << "Hello! This command line tool will allow you to create a collection of records using objects to store data. Lets get started!" << endl << endl;
-	auto book = make_shared<Book>("Title", "Description", "Some guy");
-	cout << book->getTitle() << endl << book->getDescription() << endl << book->getAuthor();
 	auto library = make_shared<Library>("HOME");
 	cout << "Welcome to your new library:  "<< library->getLocationName() << endl;
-	cout << "/nLet's add a book and create a student..." << endl;
+	cout << "\nLet's add a book and create a student..." << endl;
 	auto book1 = make_shared<Book>("1", "Description", "Some guy");
 	auto book2 = make_shared<Book>("2", "Description", "Some guy");
 	auto book3 = make_shared<Magazine>("3", "Description", "Some guy");
@@ -29,12 +30,13 @@ int main() {
 	library->addItem(book3);
 	library->addItem(book4);
 	auto student = make_shared<Student>("Hector", 712);
+	auto student1 = make_shared<Student>("Karolyn", 1525);
 	library->addStudent(student);
-	cout << "Great we've made some books take a look: " << endl;
-	cout << "/n" << library->displayItems() << endl;
-	cout << "/n And here is a student..." << library->displayStudents() << endl;
+	library->addStudent(student1);
+	cout << "\n\nGreat we've made some books take a look: " << endl;
+	cout << library->displayAll() << endl;
 	system("pause");
-	start();*/
+	/*start()*/
 	return 0;
 }
 /*

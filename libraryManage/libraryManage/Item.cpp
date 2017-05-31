@@ -11,4 +11,9 @@ Item::~Item()
 {
 }
 
+std::string Item::display()
+{
+	return "Some Item";
+}
+
 

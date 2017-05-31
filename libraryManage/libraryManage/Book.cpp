@@ -11,12 +11,9 @@ Book::Book(std::string _title, std::string _description, std::string _author): I
 std::string Book::display()
 {
 	std::string output;
-	output += "Title: ";
-	output += title;
-	output += "Description: ";
-	output += description;
-	output += "Author: ";
-	output += author;
+	output += ("\nBook Title: " + title);
+	output += ("\nDescription: " + description);
+	output += ("\nAuthor: " + author);
 	return output;
 }
 

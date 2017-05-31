@@ -15,11 +15,8 @@ Magazine::~Magazine()
 std::string Magazine::display()
 {
 	std::string output;
-	output += "Title: ";
-	output += title;
-	output += "Description: ";
-	output += description;
-	output += "Publisher: ";
-	output += publisher;
+	output += ("\nMagainze Title: " + title);
+	output += ("\nDescription: " + description);
+	output += ("\nPublisher: " + publisher);
 	return output;
 }
