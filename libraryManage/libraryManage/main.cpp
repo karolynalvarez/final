@@ -69,7 +69,7 @@ void aminMenu(shared_ptr<Library> _library) {
 	cin >> ch2;
 	switch (ch2)
 	{
-	case 1:	createStudent(); break;
+		case 1:	createStudent(); break;
 		case 2: display_alls();break;
 		case 3:
 			char num[6];
@@ -117,10 +117,11 @@ start();
 }
 	*/
 };
-	void bookCheckout(shared_ptr<Library> _library){
+void bookCheckout(shared_ptr<Library> _library){
 		int id;
 		cout << "Please Enter the 3 Digit Student ID:";
 		cin >> id;
-	};
+		if ( _library)
+};
 
 
