@@ -85,8 +85,8 @@ void aminMenu(shared_ptr<Library> _library) {
 	cin >> ch2;
 	switch (ch2)
 	{
-	case 1:	createStudent(); break;
-	case 2: display_alls(); break;
+	case 1:	createStudent(_library); break;
+	case 2: display_alls(_library); break;
 	case 3:
 		char num[6];
 		cout << "\n\n\tPlease Enter The Admission No. ";
