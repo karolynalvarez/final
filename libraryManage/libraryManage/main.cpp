@@ -9,11 +9,29 @@
 
 
 using namespace std;
+//APP FUNCTIONS
 void intro();
 void aminMenu(shared_ptr<Library>);
-void addToLibrary();
+
+//BASIC LIBRARY FUNCTIONS
 void bookCheckout(shared_ptr<Library>);
 void bookReturn(shared_ptr<Library>);
+
+//BASIC ADMIN FUNCTIONS STUDENT
+void createStudent(shared_ptr<Library>);
+void display_alls(shared_ptr<Library>);
+void display_sps(shared_ptr<Library>);
+void modify_student(shared_ptr<Library>);
+void delete_student(shared_ptr<Library>);
+
+//BASIC ADMIN FUNCTIONS STUDENT
+void write_book(shared_ptr<Library>);
+void display_allb(shared_ptr<Library>);
+void display_spb(shared_ptr<Library>);
+void write_book(shared_ptr<Library>);
+void modify_book(shared_ptr<Library>);
+void delete_book(shared_ptr<Library>);
+
 
 int main() {
 	auto library = make_shared<Library>("The Reading Place");
@@ -69,32 +87,47 @@ void aminMenu(shared_ptr<Library> _library) {
 	cin >> ch2;
 	switch (ch2)
 	{
-		case 1:	createStudent(); break;
-		case 2: display_alls();break;
-		case 3:
-			char num[6];
-			clrscr();
-			cout << "\n\n\tPlease Enter The Admission No. ";
-			cin >> num;
-			display_sps(num);
-			break;
-		case 4: modify_student();break;
-		case 5: delete_student();break;
-		case 6: clrscr();
-			write_book();break;
-		case 7: display_allb();break;
-		case 8: {
-			char num[6];
-			clrscr();
-			cout << "\n\n\tPlease Enter The book No. ";
-			cin >> num;
-			display_spb(num);
-			break;
-		}
-		case 9: modify_book();break;
-		case 10: delete_book();break;
-		case 11: return;
-		default:cout << "\a";
+	case 1:	createStudent(); break;
+	case 2: display_alls(); break;
+	case 3:
+		char num[6];
+		cout << "\n\n\tPlease Enter The Admission No. ";
+		cin >> num;
+		display_sps(num);
+		break;
+	case 4: modify_student(); break;
+	case 5: delete_student(); break;
+	case 6:write_book(); break;
+	case 7: display_allb(); break;
+	case 8: {
+		char num[6];
+		cout << "\n\n\tPlease Enter The book No. ";
+		cin >> num;
+		display_spb(num);
+		break;
+	}
+	case 9: modify_book(); break;
+	case 10: delete_book(); break;
+	case 11: return;
+	default:cout << "\a";
+	}
+};
+
+void createStudent(shared_ptr<Library> _library) {
+	int id;
+
+	cout << "\nNEW STUDENT ENTRY...\n";
+	cout << "\nEnter The admission no. ";
+	cin >> id;
+
+	string name;
+	cout << "\n\nEnter The Name of The Student **NO SPACES ";
+	cin >> name;
+	
+	auto student = make_shared<Student>(name, id);
+	_library->addStudent(student);
+	cout << "\n\nStudent Record Created..";
+};
 	/*
 	string userInput;
 string secondUserInput;
@@ -116,12 +149,15 @@ cout << "Incorrect Input, Try to add something to the library again." << endl;
 start();
 }
 	*/
-};
+
+/*
 void bookCheckout(shared_ptr<Library> _library){
-		int id;
-		cout << "Please Enter the 3 Digit Student ID:";
-		cin >> id;
-		if ( _library)
+int id;
+cout << "Please Enter the 3 Digit Student ID:";
+cin >> id;
+if ( _library)
 };
+*/
+
 
 
