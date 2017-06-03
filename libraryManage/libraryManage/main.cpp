@@ -6,8 +6,6 @@
 #include "Book.h"
 #include <memory>
 
-
-
 using namespace std;
 //APP FUNCTIONS
 void intro();
@@ -28,13 +26,13 @@ void delete_student(shared_ptr<Library>);
 void write_book(shared_ptr<Library>);
 void display_allb(shared_ptr<Library>);
 void display_spb(shared_ptr<Library>);
-void write_book(shared_ptr<Library>);
 void modify_book(shared_ptr<Library>);
 void delete_book(shared_ptr<Library>);
 
 
 int main() {
 	auto library = make_shared<Library>("The Reading Place");
+	/**/
 	intro();
 	char ch;
 	intro();
@@ -126,8 +124,68 @@ void createStudent(shared_ptr<Library> _library) {
 	
 	auto student = make_shared<Student>(name, id);
 	_library->addStudent(student);
-	cout << "\n\nStudent Record Created..";
+	cout << "\n\nStudent Record Created...";
 };
+void display_alls(shared_ptr<Library> _library) {
+	cout << _library->displayStudents();
+};
+void display_sps(shared_ptr<Library>);
+void modify_student(shared_ptr<Library>);
+void delete_student(shared_ptr<Library>);
+
+//BASIC ADMIN FUNCTIONS STUDENT
+void write_book(shared_ptr<Library> _library) {
+	int ch;
+	cout << "\nWhat type of item would you like to add?\n";
+	cout << "1) Book\n";
+	cout << "2) Magazine\n";
+	cin >> ch;
+	if (ch == 1) {
+		string title, description, author;
+		cin.ignore();
+		cout << "\nNEW BOOK ENTRY...\n";
+		cout << "\nEnter the Title: ";
+		getline(cin, title);
+
+		cout << "\nEnter the Author: ";
+		getline(cin, author);
+
+		cout << "\nEnter the Description: ";
+		getline(cin, description);
+
+		auto book = make_shared<Book>(title, description, author);
+		_library->addItem(book);
+		cout << "\n\nBook Record Created...";
+	}
+	else if (ch == 2) {
+		string title, description, publisher;
+		cin.ignore();
+		cout << "\nNEW MAGAZINE ENTRY...\n";
+		cout << "\nEnter the Title: ";
+		getline(cin, title);
+
+		cout << "\nEnter the Publisher: ";
+		getline(cin, publisher);
+
+		cout << "\nEnter the Description: ";
+		getline(cin, description);
+
+		auto magazine = make_shared<Magazine>(title, description, publisher);
+		_library->addItem(magazine);
+		cout << "\n\Magazine Record Created...";
+	}
+	else {
+		cout << "\nIncorrect Input..Try again.\n";
+	}
+};
+void display_allb(shared_ptr<Library> _library) {
+	cout << _library->displayItems();
+};
+void display_spb(shared_ptr<Library>);
+void modify_book(shared_ptr<Library>);
+void delete_book(shared_ptr<Library>);
+
+
 	/*
 	string userInput;
 string secondUserInput;
