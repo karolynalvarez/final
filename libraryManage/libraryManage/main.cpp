@@ -12,22 +12,22 @@ void intro();
 void aminMenu(shared_ptr<Library>);
 
 //BASIC LIBRARY FUNCTIONS
-void bookCheckout(shared_ptr<Library>);
-void bookReturn(shared_ptr<Library>);
+void bookCheckout(shared_ptr<Library>) { cout << "Hello frombook checkout"; };
+void bookReturn(shared_ptr<Library>) { cout << "Hello frombook checkout"; };
 
 //BASIC ADMIN FUNCTIONS STUDENT
 void createStudent(shared_ptr<Library>);
 void display_alls(shared_ptr<Library>);
-void display_sps(shared_ptr<Library>);
-void modify_student(shared_ptr<Library>);
-void delete_student(shared_ptr<Library>);
+void display_sps(shared_ptr<Library>, int);
+//void modify_student(shared_ptr<Library>);
+//void delete_student(shared_ptr<Library>);
 
 //BASIC ADMIN FUNCTIONS STUDENT
 void write_book(shared_ptr<Library>);
 void display_allb(shared_ptr<Library>);
-void display_spb(shared_ptr<Library>);
-void modify_book(shared_ptr<Library>);
-void delete_book(shared_ptr<Library>);
+void display_spb(shared_ptr<Library>, string);
+//void modify_book(shared_ptr<Library>);
+//void delete_book(shared_ptr<Library>);
 
 
 int main() {
@@ -88,24 +88,29 @@ void aminMenu(shared_ptr<Library> _library) {
 	case 1:	createStudent(_library); break;
 	case 2: display_alls(_library); break;
 	case 3:
-		char num[6];
+		int num;
 		cout << "\n\n\tPlease Enter The Admission No. ";
 		cin >> num;
-		display_sps(num);
+		display_sps(_library, num);
 		break;
-	case 4: modify_student(); break;
-	case 5: delete_student(); break;
-	case 6:write_book(); break;
-	case 7: display_allb(); break;
+	case 4: //modify_student(_library);
+		break;
+	case 5: //delete_student(_library); 
+		break;
+	case 6:write_book(_library); break;
+	case 7: display_allb(_library); break;
 	case 8: {
-		char num[6];
-		cout << "\n\n\tPlease Enter The book No. ";
-		cin >> num;
-		display_spb(num);
+		string _title;
+		cout << "\n\n\tPlease Enter The book title. ";
+		cin.ignore();
+		getline(cin, _title);
+		display_spb(_library, _title);
 		break;
 	}
-	case 9: modify_book(); break;
-	case 10: delete_book(); break;
+	case 9: //modify_book(_library); 
+		break;
+	case 10: //delete_book(_library); 
+		break;
 	case 11: return;
 	default:cout << "\a";
 	}
@@ -115,12 +120,13 @@ void createStudent(shared_ptr<Library> _library) {
 	int id;
 
 	cout << "\nNEW STUDENT ENTRY...\n";
-	cout << "\nEnter The admission no. ";
+	cout << "\nEnter the admission number: ";
 	cin >> id;
 
 	string name;
-	cout << "\n\nEnter The Name of The Student **NO SPACES ";
-	cin >> name;
+	cout << "\n\nEnter the Name of The Student: ";
+	cin.ignore();
+	getline(cin, name);
 	
 	auto student = make_shared<Student>(name, id);
 	_library->addStudent(student);
@@ -129,9 +135,16 @@ void createStudent(shared_ptr<Library> _library) {
 void display_alls(shared_ptr<Library> _library) {
 	cout << _library->displayStudents();
 };
-void display_sps(shared_ptr<Library>);
-void modify_student(shared_ptr<Library>);
-void delete_student(shared_ptr<Library>);
+void display_sps(shared_ptr<Library> _library, int _id) {
+	if (_id == (_library->findStudent(_id)->getId()) ) {
+		cout << _library->findStudent(_id)->display();
+	}
+	else {
+		cout << "\nSTUDENT NOT FOUND...\n";
+	}
+};
+//void modify_student(shared_ptr<Library>);
+//void delete_student(shared_ptr<Library>);
 
 //BASIC ADMIN FUNCTIONS STUDENT
 void write_book(shared_ptr<Library> _library) {
@@ -172,7 +185,7 @@ void write_book(shared_ptr<Library> _library) {
 
 		auto magazine = make_shared<Magazine>(title, description, publisher);
 		_library->addItem(magazine);
-		cout << "\n\Magazine Record Created...";
+		cout << "\n\nMagazine Record Created...";
 	}
 	else {
 		cout << "\nIncorrect Input..Try again.\n";
@@ -181,7 +194,15 @@ void write_book(shared_ptr<Library> _library) {
 void display_allb(shared_ptr<Library> _library) {
 	cout << _library->displayItems();
 };
-void display_spb(shared_ptr<Library>);
+void display_spb(shared_ptr<Library> _library, string _title) {
+	std::transform(_title.begin(), _title.end(), _title.begin(), ::tolower);
+	if (_title == (_library->findItem(_title)->getTitle())) {
+		cout << _library->findItem(_title)->display();
+	}
+	else {
+		cout << "\nITEM NOT FOUND...\n";
+	}
+};
 void modify_book(shared_ptr<Library>);
 void delete_book(shared_ptr<Library>);
 

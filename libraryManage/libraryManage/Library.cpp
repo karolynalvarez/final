@@ -48,6 +48,27 @@ std::string Library::displayStudents()
 	return output;
 }
 
+std::shared_ptr<Student> Library::findStudent(int _id)
+{
+	for (int x = 0; x < allStudents.size(); x++) {
+		if (_id == allStudents[x]->getId()) {
+			return allStudents[x];
+		}
+	}
+	return nullptr;
+}
+
+std::shared_ptr<Item> Library::findItem(std::string _title)
+{
+	std::transform(_title.begin(), _title.end(), _title.begin(), ::tolower);
+	for (int x = 0; x < allItems.size(); x++) {
+		if (_title == allItems[x]->getTitle()) {
+			return allItems[x];
+		}
+	}
+	return nullptr;
+}
+
 void Library::printBookList()
 {
 }

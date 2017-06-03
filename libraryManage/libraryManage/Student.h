@@ -17,7 +17,12 @@ public:
 	~Student();
 	void checkOut(std::shared_ptr<Item>);
 	void returnBook(std::shared_ptr<Item>);
+	int getId() { return id; };
 	void printBookHistory(std::vector<std::shared_ptr<Item>>);
 	std::string display();
+	std::string getTitle() {
+		std::transform(name.begin(), name.end(), name.begin(), ::tolower);
+		return name;
+	};
 };
 

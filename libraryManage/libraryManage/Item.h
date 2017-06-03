@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <algorithm>
 class Item
 {
 protected:
@@ -11,5 +12,9 @@ public:
 	~Item();
 	virtual std::string display();
 	void checkOut() { checkedOut = true; };
+	std::string getTitle() { 
+		std::transform(title.begin(), title.end(), title.begin(), ::tolower);
+		return title; 
+	};
 };
 
