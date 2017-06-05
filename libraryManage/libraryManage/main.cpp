@@ -14,8 +14,9 @@ void intro();
 void aminMenu(shared_ptr<Library>);
 
 //BASIC LIBRARY FUNCTIONS
-void bookCheckout(shared_ptr<Library>) { cout << "Hello frombook checkout"; };
-void bookReturn(shared_ptr<Library>) { cout << "Hello frombook checkout"; };
+void bookCheckout(shared_ptr<Library>);
+void bookReturn(shared_ptr<Library>);
+void displayAllLibrary(shared_ptr<Library>);
 
 //BASIC ADMIN FUNCTIONS STUDENT
 void createStudent(shared_ptr<Library>);
@@ -79,7 +80,8 @@ void aminMenu(shared_ptr<Library> _library) {
 	cout << "\n\n\t8.)DISPLAY SPECIFIC BOOK ";
 	cout << "\n\n\t9.)MODIFY BOOK ";
 	cout << "\n\n\t10.)DELETE BOOK ";
-	cout << "\n\n\t11.)BACK TO MAIN MENU";
+	cout << "\n\n\t11.)DISPLAY WHOLE LIBRARY ";
+	cout << "\n\n\t12.)BACK TO MAIN MENU";
 	cout << "\n\n\tPlease Enter Your Choice (1-11) ";
 	cin >> ch2;
 	switch (ch2)
@@ -105,7 +107,8 @@ void aminMenu(shared_ptr<Library> _library) {
 	case 9: modify_book(_library); 
 		break;
 	case 10: delete_book(_library); break;
-	case 11: aminMenu(_library);
+	case 11: displayAllLibrary(_library); break;
+	case 12: aminMenu(_library);
 	default:
 		cout << "\nIncorrect Input try again...";
 		aminMenu(_library);
@@ -162,6 +165,35 @@ void delete_student(shared_ptr<Library> _library) {
 	else {
 		cout << "\nStudent not found...\n";
 	}
+};
+
+void bookCheckout(shared_ptr<Library> _library) {
+	string _title;
+	cout << "\nPlease enter the book title: ";
+	cin.ignore();
+	getline(cin, _title);
+	std::transform(_title.begin(), _title.end(), _title.begin(), ::tolower);
+	if (_title == _library->findItem(_title)->getTitle()) {
+		int num;
+		cout << "\nFound the book. Now enter the student number who it will be assigned to:";
+		cin.ignore();
+		cin >> num;
+		if (num == _library->findStudent(num)->getId()) {
+			cout << "\nFound the student. Checking out book now...";
+			_library->findStudent(num)->checkOut(_library->findItem(_title));
+		}
+		else {
+			cout << "This student was not found..returning to Administator Menu";
+			aminMenu(_library);
+		}
+	}
+	else {
+		cout << "\nCouldn't find desired book!";
+	}
+};
+void bookReturn(shared_ptr<Library>);
+void displayAllLibrary(shared_ptr<Library> _library) {
+	cout << _library->displayAll();
 };
 
 //BASIC ADMIN FUNCTIONS STUDENT
