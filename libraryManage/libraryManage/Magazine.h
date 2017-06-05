@@ -9,5 +9,8 @@ public:
 	Magazine(std::string, std::string, std::string);
 	~Magazine();
 	std::string display();
+	void setAuth(std::string newAuth) {
+		publisher = newAuth;
+	};
 };
 

@@ -10,5 +10,8 @@ public:
 	Book(std::string, std::string, std::string);
 	std::string display();
 	~Book();
+	void setAuth(std::string newAuth) {
+		author = newAuth;
+	};
 };
 

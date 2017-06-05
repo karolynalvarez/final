@@ -16,5 +16,7 @@ public:
 		std::transform(title.begin(), title.end(), title.begin(), ::tolower);
 		return title; 
 	};
+	void setTitle(std::string newTitle) { title = newTitle; }
+	void setDescription(std::string newDesc) { description = newDesc; }
 };
 

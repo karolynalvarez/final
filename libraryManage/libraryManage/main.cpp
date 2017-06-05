@@ -33,8 +33,7 @@ void display_spb(shared_ptr<Library>, string);
 int main() {
 	auto library = make_shared<Library>("The Reading Place");
 	/**/
-	intro();
-	char ch;
+	int ch;
 	intro();
 	do
 	{
@@ -63,7 +62,7 @@ void intro() {
 	cout << "SYSTEM\n";
 	cout << "\nMADE BY : Karolyn Alvarez";
 	cout << "\nSCHOOL : NORCO COLLEGE\n";
-	cout << "Welcome, this tool will allow you to manage students and book, tap any key to get started!\n";
+	cout << "Welcome, this tool will allow you to manage students and book.\n";
 	system("pause");
 }
 
@@ -203,7 +202,35 @@ void display_spb(shared_ptr<Library> _library, string _title) {
 		cout << "\nITEM NOT FOUND...\n";
 	}
 };
-void modify_book(shared_ptr<Library>);
+void modify_book(shared_ptr<Library> _library, string _title) {
+	std::transform(_title.begin(), _title.end(), _title.begin(), ::tolower);
+	if (_title == (_library->findItem(_title)->getTitle())) {
+		cout << "Would you like to modify the: \n";
+		cout << "1)Title\n";
+		cout << "2)Description\n";
+		int ch;
+		cin.ignore();
+		cin >> ch;
+		if (ch == 1) {
+			string newTitle;
+			cout << "Enter New Title: ";
+			getline(cin, newTitle);
+			_library->findItem(_title)->setTitle(newTitle);
+		}
+		else if (ch == 2) {
+			string newDescription;
+			cout << "Enter New Description: ";
+			getline(cin, newDescription);
+			_library->findItem(_title)->setDescription(newDescription);
+		}
+		else {
+			cout << "Please enter either 1, 2, 3\n";
+		}
+	}
+	else {
+		cout << "\nITEM NOT FOUND...\n";
+	}
+};
 void delete_book(shared_ptr<Library>);
 
 
