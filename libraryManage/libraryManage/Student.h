@@ -20,6 +20,7 @@ public:
 	int getId() { return id; };
 	void printBookHistory(std::vector<std::shared_ptr<Item>>);
 	std::string display();
+	void setName(std::string _name) { name = _name; };
 	std::string getTitle() {
 		std::transform(name.begin(), name.end(), name.begin(), ::tolower);
 		return name;

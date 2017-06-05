@@ -80,6 +80,16 @@ int Library::findItemIndex(std::string _title)
 	return 0;
 }
 
+int Library::findStudentIndex(int _id)
+{
+	for (int x = 0; x < allStudents.size(); x++) {
+		if (_id == allStudents[x]->getId()) {
+			return x;
+		}
+	}
+	return 0;
+}
+
 void Library::deleteItem(std::string _title)
 {
 	std::transform(_title.begin(), _title.end(), _title.begin(), ::tolower);
@@ -89,6 +99,14 @@ void Library::deleteItem(std::string _title)
 				allItems.erase(allItems.begin() + x);
 			}
 		}
+	}
+}
+
+void Library::deleteStudent(int _id)
+{	
+	if (_id == findStudent(_id)->getId()) {
+		int x = findStudentIndex(_id);
+		allStudents.erase(allStudents.begin() + x);
 	}
 }
 
