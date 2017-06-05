@@ -11,6 +11,15 @@ Library::~Library()
 {
 }
 
+void Library::returnBook(std::string _title)
+{
+	for (int x = 0; x < allItems.size(); x++) {
+		if (_title == allItems[x]->getTitle()) {
+			allItems[x]->returnIn();
+		}
+	}
+}
+
 void Library::addStudent(std::shared_ptr<Student> _student)
 {
 	allStudents.push_back(_student);
@@ -19,6 +28,22 @@ void Library::addStudent(std::shared_ptr<Student> _student)
 void Library::addItem(std::shared_ptr<Item> _item)
 {
 	allItems.push_back(_item);
+}
+
+bool Library::bookExists(std::string _title)
+{
+	for (int x = 0; x < allItems.size(); x++) {
+		if (allItems[x]->getTitle() == _title) return true;
+	}
+	return false;
+}
+
+bool Library::studentExists(int _id)
+{
+	for (int x = 0; x < allStudents.size(); x++) {
+		if (allStudents[x]->getId() == _id) return true;
+	}
+	return false;
 }
 
 std::string Library::displayAll()

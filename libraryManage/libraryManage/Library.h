@@ -13,8 +13,11 @@ private:
 public:
 	Library(std::string);
 	~Library();
+	void returnBook(std::string);
 	void addStudent(std::shared_ptr<Student>);
 	void addItem(std::shared_ptr<Item>);
+	bool bookExists(std::string);
+	bool studentExists(int);
 	std::string displayAll();
 	std::string displayItems();
 	std::string displayStudents();

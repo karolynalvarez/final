@@ -18,16 +18,23 @@ void Student::checkOut(std::shared_ptr<Item> _item)
 	bookCheckedOut = _item;
 }
 
-void Student::returnBook(std::shared_ptr<Item> _item)
+void Student::returnBook()
 {
 	if (bookCheckedOut != NULL) {
 		bookQueue.pop();
 		bookCheckedOut = NULL;
-	} 
+	}
 }
+
+
 
 void Student::printBookHistory(std::vector<std::shared_ptr<Item>>)
 {
+}
+
+int Student::getBookQueueSize()
+{
+	return bookQueue.size();
 }
 
 std::string Student::display()

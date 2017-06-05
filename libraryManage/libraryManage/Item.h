@@ -12,11 +12,13 @@ public:
 	~Item();
 	virtual std::string display();
 	void checkOut() { checkedOut = true; };
+	void returnIn() { checkedOut = false; };
 	std::string getTitle() { 
 		std::transform(title.begin(), title.end(), title.begin(), ::tolower);
 		return title; 
 	};
 	void setTitle(std::string newTitle) { title = newTitle; }
 	void setDescription(std::string newDesc) { description = newDesc; }
+	bool getStatus() { return checkedOut; };
 };
 
