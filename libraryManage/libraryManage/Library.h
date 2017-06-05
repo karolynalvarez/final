@@ -21,6 +21,8 @@ public:
 	std::string getLocationName() { return locationName; };
 	std::shared_ptr<Student> findStudent(int);
 	std::shared_ptr<Item> findItem(std::string);
+	int findItemIndex(std::string);
+	void deleteItem(std::string);
 	void printBookList();
 };
 

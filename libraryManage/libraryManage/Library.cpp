@@ -69,6 +69,29 @@ std::shared_ptr<Item> Library::findItem(std::string _title)
 	return nullptr;
 }
 
+int Library::findItemIndex(std::string _title)
+{
+	std::transform(_title.begin(), _title.end(), _title.begin(), ::tolower);
+	for (int x = 0; x < allItems.size(); x++) {
+		if (_title == allItems[x]->getTitle()) {
+			return x;
+		}
+	}
+	return 0;
+}
+
+void Library::deleteItem(std::string _title)
+{
+	std::transform(_title.begin(), _title.end(), _title.begin(), ::tolower);
+	if (_title == findItem(_title)->getTitle()) {
+		for (int x = 0; x < allItems.size(); x++) {
+			if (_title == allItems[x]->getTitle()) {
+				allItems.erase(allItems.begin() + x);
+			}
+		}
+	}
+}
+
 void Library::printBookList()
 {
 }

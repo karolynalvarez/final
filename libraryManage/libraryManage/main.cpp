@@ -25,9 +25,9 @@ void display_sps(shared_ptr<Library>, int);
 //BASIC ADMIN FUNCTIONS STUDENT
 void write_book(shared_ptr<Library>);
 void display_allb(shared_ptr<Library>);
-void display_spb(shared_ptr<Library>, string);
+void display_spb(shared_ptr<Library>);
 //void modify_book(shared_ptr<Library>);
-//void delete_book(shared_ptr<Library>);
+void delete_book(shared_ptr<Library>);
 
 
 int main() {
@@ -46,10 +46,10 @@ int main() {
 		cin >> ch;
 		switch (ch)
 		{
-		case '1':bookCheckout(library); break;
-		case '2':bookReturn(library); break;
-		case '3':aminMenu(library);break;
-		case '4':exit(0);
+		case 1 :bookCheckout(library); break;
+		case 2 :bookReturn(library); break;
+		case 3 :aminMenu(library);break;
+		case 4:exit(0);
 		default:cout << "\a";
 		}
 	} while (ch != '4');
@@ -69,17 +69,17 @@ void intro() {
 void aminMenu(shared_ptr<Library> _library) {
 	int ch2;
 	cout << "\n\n\n\tADMINISTRATOR MENU";
-	cout << "\n\n\t1.CREATE STUDENT RECORD";
-	cout << "\n\n\t2.DISPLAY ALL STUDENTS RECORD";
-	cout << "\n\n\t3.DISPLAY SPECIFIC STUDENT RECORD ";
-	cout << "\n\n\t4.MODIFY STUDENT RECORD";
-	cout << "\n\n\t5.DELETE STUDENT RECORD";
-	cout << "\n\n\t6.CREATE BOOK ";
-	cout << "\n\n\t7.DISPLAY ALL BOOKS ";
-	cout << "\n\n\t8.DISPLAY SPECIFIC BOOK ";
-	cout << "\n\n\t9.MODIFY BOOK ";
-	cout << "\n\n\t10.DELETE BOOK ";
-	cout << "\n\n\t11.BACK TO MAIN MENU";
+	cout << "\n\n\t1.)CREATE STUDENT RECORD";
+	cout << "\n\n\t2.)DISPLAY ALL STUDENTS RECORD";
+	cout << "\n\n\t3.)DISPLAY SPECIFIC STUDENT RECORD ";
+	cout << "\n\n\t4.)MODIFY STUDENT RECORD";
+	cout << "\n\n\t5.)DELETE STUDENT RECORD";
+	cout << "\n\n\t6.)CREATE BOOK ";
+	cout << "\n\n\t7.)DISPLAY ALL BOOKS ";
+	cout << "\n\n\t8.)DISPLAY SPECIFIC BOOK ";
+	cout << "\n\n\t9.)MODIFY BOOK ";
+	cout << "\n\n\t10.)DELETE BOOK ";
+	cout << "\n\n\t11.)BACK TO MAIN MENU";
 	cout << "\n\n\tPlease Enter Your Choice (1-11) ";
 	cin >> ch2;
 	switch (ch2)
@@ -98,20 +98,16 @@ void aminMenu(shared_ptr<Library> _library) {
 		break;
 	case 6:write_book(_library); break;
 	case 7: display_allb(_library); break;
-	case 8: {
-		string _title;
-		cout << "\n\n\tPlease Enter The book title. ";
-		cin.ignore();
-		getline(cin, _title);
-		display_spb(_library, _title);
+	case 8:
+		display_spb(_library);
 		break;
-	}
 	case 9: //modify_book(_library); 
 		break;
-	case 10: //delete_book(_library); 
-		break;
-	case 11: return;
-	default:cout << "\a";
+	case 10: delete_book(_library); break;
+	case 11: aminMenu(_library);
+	default:
+		cout << "\nIncorrect Input try again...";
+		aminMenu(_library);
 	}
 };
 
@@ -193,7 +189,11 @@ void write_book(shared_ptr<Library> _library) {
 void display_allb(shared_ptr<Library> _library) {
 	cout << _library->displayItems();
 };
-void display_spb(shared_ptr<Library> _library, string _title) {
+void display_spb(shared_ptr<Library> _library) {
+	string _title;
+	cout << "\n\n\tPlease Enter the book title. ";
+	cin.ignore();
+	getline(cin, _title);
 	std::transform(_title.begin(), _title.end(), _title.begin(), ::tolower);
 	if (_title == (_library->findItem(_title)->getTitle())) {
 		cout << _library->findItem(_title)->display();
@@ -231,7 +231,16 @@ void modify_book(shared_ptr<Library> _library, string _title) {
 		cout << "\nITEM NOT FOUND...\n";
 	}
 };
-void delete_book(shared_ptr<Library>);
+void delete_book(shared_ptr<Library> _library) {
+	string _title;
+	cout << "\n\n\tPlease Enter the book title. ";
+	std::transform(_title.begin(), _title.end(), _title.begin(), ::tolower);
+	cin.ignore();
+	getline(cin, _title);
+	if (_title == _library->findItem(_title)->getTitle()) {
+		_library->deleteItem(_title);
+	}
+};
 
 
 	/*
