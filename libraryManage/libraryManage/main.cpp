@@ -5,6 +5,7 @@
 #include "Magazine.h"
 #include "Book.h"
 #include <memory>
+#include <fstream>
 
 /*CODE REUSED FROM http://www.cppforschool.com/project/library-management-system.html */
 
@@ -17,6 +18,98 @@ void aminMenu(shared_ptr<Library>);
 void bookCheckout(shared_ptr<Library>);
 void bookReturn(shared_ptr<Library>);
 void displayAllLibrary(shared_ptr<Library>);
+
+void openLibrary(shared_ptr<Library> _library) {
+
+	fstream fileBeingRead1;
+	fstream fileBeingRead2;
+	static string _id;
+	static string _name;
+	static string _bookTitle;
+	static string _bookDescription;
+	static string _bookAuthor;
+	static string _checkOutId;
+
+	fileBeingRead1.open("students.txt", ios::in);
+	if (fileBeingRead1) {
+		cout << "\tLoading students...\n";
+		while (!fileBeingRead1.eof()) {
+			getline(fileBeingRead1, _id);
+			getline(fileBeingRead1, _name);
+			auto student = make_shared<Student>(_name, std::stoi(_id));
+			_library->addStudent(student);
+		}
+		cout << "\tStudents have been loaded from file.\n";
+		fileBeingRead1.close();
+	}
+	else {
+		cout << "\tUnable to load students from library";
+	}
+
+	fileBeingRead2.open("books.txt", ios::in);
+	if (fileBeingRead2) {
+		cout << "\tLoading books...\n";
+		while (!fileBeingRead2.eof()) {
+			getline(fileBeingRead2, _bookTitle);
+			getline(fileBeingRead2, _bookDescription);
+			getline(fileBeingRead2, _bookAuthor);
+			auto book = make_shared<Book>(_bookTitle, _bookDescription, _bookAuthor);
+			_library->addItem(book);
+		}
+		cout << "\tBooks have been loaded from file.\n";
+		fileBeingRead2.close();
+	}
+	else {
+		cout << "Unable to load students from library";
+	}
+
+};
+void saveLibrary(shared_ptr<Library> _library) {
+
+	fstream fileBeingRead1;
+	fstream fileBeingRead2;
+	static string _id;
+	static string _name;
+
+	static string _bookTitle;
+	static string _bookDescription;
+	static string _bookAuthor;
+	static string _checkOutId;
+
+	fileBeingRead1.open("students.txt", ios::in);
+	if (fileBeingRead1) {
+		cout << "\tLoading students...\n";
+		while (!fileBeingRead1.eof()) {
+			getline(fileBeingRead1, _id);
+			getline(fileBeingRead1, _name);
+			auto student = make_shared<Student>(_name, std::stoi(_id));
+			_library->addStudent(student);
+		}
+		cout << "\tStudents have been loaded from file.\n";
+		fileBeingRead1.close();
+	}
+	else {
+		cout << "\tUnable to load students from library";
+	}
+
+	fileBeingRead2.open("books.txt", ios::in);
+	if (fileBeingRead2) {
+		cout << "\tLoading books...\n";
+		while (!fileBeingRead2.eof()) {
+			getline(fileBeingRead2, _bookTitle);
+			getline(fileBeingRead2, _bookDescription);
+			getline(fileBeingRead2, _bookAuthor);
+			auto book = make_shared<Book>(_bookTitle, _bookDescription, _bookAuthor);
+			_library->addItem(book);
+		}
+		cout << "\tBooks have been loaded from file.\n";
+		fileBeingRead2.close();
+	}
+	else {
+		cout << "Unable to load students from library";
+	}
+
+};
 
 //BASIC ADMIN FUNCTIONS STUDENT
 void createStudent(shared_ptr<Library>);
@@ -183,8 +276,16 @@ void bookCheckout(shared_ptr<Library> _library) {
 			cin >> num;
 			cin.ignore();
 			if (_library->studentExists(num)) {
+				auto student = _library->findStudent(num);
 				cout << "\nFound the student no. Checking out book now...";
-				_library->findStudent(num)->checkOut(_library->findItem(_title));
+				if (student->hasBook() == false) {
+					auto book = _library->findItem(_title);
+					book->setCheckOutId(student->getId());
+					student->checkOut(book);
+				}
+				else {
+					cout << student->getName() << " currently has a book checked out.\n";
+				}
 			}
 			else {
 				cout << "This student was not found..returning to Administator Menu";
@@ -325,6 +426,7 @@ void modify_book(shared_ptr<Library> _library) {
 		cout << "\nITEM NOT FOUND...\n";
 	}
 };
+
 void delete_book(shared_ptr<Library> _library) {
 		string _title;
 		cout << "\n\n\tPlease Enter the book title: ";
