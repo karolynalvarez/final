@@ -23,11 +23,16 @@ public:
 	std::string displayStudents();
 	std::string getLocationName() { return locationName; };
 	std::shared_ptr<Student> findStudent(int);
+	std::shared_ptr<Student> findStudentyByIndex(int);
 	std::shared_ptr<Item> findItem(std::string);
+	std::shared_ptr<Item> findItemByIndex(int);
 	int findItemIndex(std::string);
 	int findStudentIndex(int);
 	void deleteItem(std::string);
 	void deleteStudent(int);
+	int getAllItemSize() { return allItems.size(); };
+	int getAllStudentSize() { return allStudents.size(); };
+
 	void printBookList();
 };
 

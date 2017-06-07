@@ -36,7 +36,8 @@ void openLibrary(shared_ptr<Library> _library) {
 		while (!fileBeingRead1.eof()) {
 			getline(fileBeingRead1, _id);
 			getline(fileBeingRead1, _name);
-			auto student = make_shared<Student>(_name, std::stoi(_id));
+			int id = std::stoi(_id);
+			auto student = make_shared<Student>(_name, id);
 			_library->addStudent(student);
 		}
 		cout << "\tStudents have been loaded from file.\n";
@@ -62,12 +63,12 @@ void openLibrary(shared_ptr<Library> _library) {
 	else {
 		cout << "Unable to load students from library";
 	}
-
 };
 void saveLibrary(shared_ptr<Library> _library) {
 
-	fstream fileBeingRead1;
-	fstream fileBeingRead2;
+	fstream fileOutStudents;
+	fstream fileOutBooks;
+
 	static string _id;
 	static string _name;
 
@@ -76,22 +77,21 @@ void saveLibrary(shared_ptr<Library> _library) {
 	static string _bookAuthor;
 	static string _checkOutId;
 
-	fileBeingRead1.open("students.txt", ios::in);
-	if (fileBeingRead1) {
-		cout << "\tLoading students...\n";
-		while (!fileBeingRead1.eof()) {
-			getline(fileBeingRead1, _id);
-			getline(fileBeingRead1, _name);
-			auto student = make_shared<Student>(_name, std::stoi(_id));
-			_library->addStudent(student);
+	fileOutStudents.open("students.txt", ios::out);
+	if (fileOutStudents) {
+		cout << "\tSaving students to file...\n";
+		for (int x = 0; x < _library->getAllStudentSize(); x++) {
+			auto student = _library->findStudentyByIndex(x);
+			fileOutStudents << student->getId() << endl;
+			fileOutStudents << student->getName() << endl;
 		}
-		cout << "\tStudents have been loaded from file.\n";
-		fileBeingRead1.close();
+		cout << "\tStudents have been saved to file.\n";
+		fileOutStudents.close();
 	}
 	else {
-		cout << "\tUnable to load students from library";
+		cout << "\tUnable to open student file, Sorry...";
 	}
-
+	/*
 	fileBeingRead2.open("books.txt", ios::in);
 	if (fileBeingRead2) {
 		cout << "\tLoading books...\n";
@@ -108,6 +108,7 @@ void saveLibrary(shared_ptr<Library> _library) {
 	else {
 		cout << "Unable to load students from library";
 	}
+	*/
 
 };
 
@@ -128,10 +129,7 @@ void delete_book(shared_ptr<Library>);
 
 int main() {
 	auto library = make_shared<Library>("The Reading Place");
-	auto student = make_shared<Student>("Sample Studnet", 1);
-	auto book = make_shared<Book>("Sample Book Title", "Sample Description", "Sample Author");
-	library->addItem(book);
-	library->addStudent(student);
+	openLibrary(library);
 	int ch;
 	intro();
 	do
@@ -140,7 +138,7 @@ int main() {
 		cout << "\n\n\t01. BOOK CHECKOUT";
 		cout << "\n\n\t02. BOOK RETURN";
 		cout << "\n\n\t03. ADMINISTRATOR MENU";
-		cout << "\n\n\t04. EXIT";
+		cout << "\n\n\t04. SAVE & EXIT";
 		cout << "\n\n\tPlease Select Your Option (1-4) ";
 		cin >> ch;
 		switch (ch)
@@ -148,8 +146,11 @@ int main() {
 		case 1 :bookCheckout(library); break;
 		case 2 :bookReturn(library); break;
 		case 3 :aminMenu(library);break;
-		case 4:exit(0);
-		default:cout << "\a";
+		case 4: 
+			saveLibrary(library);
+			system("pause");
+			exit(0);
+		default:cout << "\tIncorrect key entered...\n";
 		}
 	} while (ch != '4');
 	return 0;
@@ -212,20 +213,30 @@ void aminMenu(shared_ptr<Library> _library) {
 };
 
 void createStudent(shared_ptr<Library> _library) {
-	int id;
+	try {
+		int id;
 
-	cout << "\nNEW STUDENT ENTRY...\n";
-	cout << "\nEnter the admission number: ";
-	cin >> id;
+		cout << "\nNEW STUDENT ENTRY...\n";
+		cout << "\nEnter the admission number: ";
+		cin >> id;
+		if (_library->studentExists(id) != true) {
+			string name;
+			cout << "nEnter the Name of The Student: ";
+			cin.ignore();
+			getline(cin, name);
 
-	string name;
-	cout << "\nEnter the Name of The Student: ";
-	cin.ignore();
-	getline(cin, name);
-	
-	auto student = make_shared<Student>(name, id);
-	_library->addStudent(student);
-	cout << "\nStudent Record Created...";
+			auto student = make_shared<Student>(name, id);
+			_library->addStudent(student);
+			cout << "\nStudent Record Created...";
+		}
+		else {
+			throw "This is a duplicate id number, try a different number\n";
+		}
+	}
+	catch (string e) {
+		cout << e;
+		aminMenu(_library);
+	}
 };
 void display_alls(shared_ptr<Library> _library) {
 	cout << _library->displayStudents();
@@ -270,7 +281,8 @@ void bookCheckout(shared_ptr<Library> _library) {
 	getline(cin, _title);
 	std::transform(_title.begin(), _title.end(), _title.begin(), ::tolower);
 	if (_library->bookExists(_title) == true) {
-		if (_library->findItem(_title)->getStatus() == false) {
+		auto item = _library->findItem(_title);
+		if (item->getStatus() == false) {
 			int num;
 			cout << "\nNow enter the student number who it will be assigned to:";
 			cin >> num;
@@ -279,9 +291,8 @@ void bookCheckout(shared_ptr<Library> _library) {
 				auto student = _library->findStudent(num);
 				cout << "\nFound the student no. Checking out book now...";
 				if (student->hasBook() == false) {
-					auto book = _library->findItem(_title);
-					book->setCheckOutId(student->getId());
-					student->checkOut(book);
+					item->setCheckOutId(student->getId());
+					student->checkOut(item);
 				}
 				else {
 					cout << student->getName() << " currently has a book checked out.\n";
@@ -328,9 +339,7 @@ void bookReturn(shared_ptr<Library> _library) {
 		system("pause");
 	}
 };
-void displayAllLibrary(shared_ptr<Library> _library) {
-	cout << _library->displayAll();
-};
+void displayAllLibrary(shared_ptr<Library> _library) { cout << _library->displayAll(); };
 
 //BASIC ADMIN FUNCTIONS STUDENT
 void write_book(shared_ptr<Library> _library) {
@@ -426,7 +435,6 @@ void modify_book(shared_ptr<Library> _library) {
 		cout << "\nITEM NOT FOUND...\n";
 	}
 };
-
 void delete_book(shared_ptr<Library> _library) {
 		string _title;
 		cout << "\n\n\tPlease Enter the book title: ";

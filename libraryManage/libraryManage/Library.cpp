@@ -83,6 +83,11 @@ std::shared_ptr<Student> Library::findStudent(int _id)
 	return nullptr;
 }
 
+std::shared_ptr<Student> Library::findStudentyByIndex(int x)
+{
+	return allStudents[x];
+}
+
 std::shared_ptr<Item> Library::findItem(std::string _title)
 {
 	std::transform(_title.begin(), _title.end(), _title.begin(), ::tolower);
@@ -92,6 +97,11 @@ std::shared_ptr<Item> Library::findItem(std::string _title)
 		}
 	}
 	return nullptr;
+}
+
+std::shared_ptr<Item> Library::findItemByIndex(int x)
+{
+	return allItems[x];
 }
 
 int Library::findItemIndex(std::string _title)
