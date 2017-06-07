@@ -54,7 +54,10 @@ void openLibrary(shared_ptr<Library> _library) {
 			getline(fileBeingRead2, _bookTitle);
 			getline(fileBeingRead2, _bookDescription);
 			getline(fileBeingRead2, _bookAuthor);
+			getline(fileBeingRead2, _checkOutId);
+			auto checkOutId = std::stoi(_checkOutId);
 			auto book = make_shared<Book>(_bookTitle, _bookDescription, _bookAuthor);
+			book->setCheckOutId(checkOutId);
 			_library->addItem(book);
 		}
 		cout << "\tBooks have been loaded from file.\n";

@@ -10,11 +10,11 @@ private:
 	std::string name;
 	int id;
 	std::queue<std::shared_ptr<Item>> bookQueue;
-	std::shared_ptr<Item> bookCheckedOut = NULL;
+	std::shared_ptr<Item> bookCheckedOut = nullptr;
 public:
 	Student(std::string _name, int _id);
 	~Student();
-	bool hasBook() { if (bookCheckedOut == NULL) return false; };
+	bool hasBook() { if (bookCheckedOut == nullptr) return false; };
 	void checkOut(std::shared_ptr<Item>);
 	void returnBook();
 	int getId() { return id; };

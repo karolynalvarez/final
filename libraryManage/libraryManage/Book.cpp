@@ -11,10 +11,20 @@ Book::Book(std::string _title, std::string _description, std::string _author): I
 std::string Book::display()
 {
 	std::string output;
-	output += ("\nBook Title: " + title);
-	output += ("\nDescription: " + description);
-	output += ("\nAuthor: " + author);
-	return output;
+	if (checkOutId == -1) {
+		output += ("\nBook Title: " + title);
+		output += ("\nDescription: " + description);
+		output += ("\nAuthor: " + author);
+		output += ("\Checked Out by ID#: None, it's available");
+		return output;
+	}
+	else {
+		output += ("\nBook Title: " + title);
+		output += ("\nDescription: " + description);
+		output += ("\nAuthor: " + author);
+		output += ("\Checked Out by ID#: " + std::to_string(checkOutId));
+		return output;
+	}
 }
 
 Book::~Book()

@@ -7,7 +7,7 @@ protected:
 	std::string title;
 	std::string description;
 	bool checkedOut = false;
-	int checkOutId;
+	int checkOutId = -1;
 public:
 	Item(std::string, std::string);
 	~Item();

@@ -34,6 +34,12 @@ int Student::getBookQueueSize()
  
 std::string Student::display()
 {
-	std::string output = (("\nSTUDENT ID: " + std::to_string(id)) + ("\nNAME:" + this->getTitle() + "\n"));
+	std::string output;
+	if (bookCheckedOut == nullptr) {
+		output += (("\nSTUDENT ID: " + std::to_string(id)) + ("\nNAME:" + this->getTitle() + "\n"));
+	}
+	else {
+		output += (("\nSTUDENT ID: " + std::to_string(id)) + ("\nNAME:" + this->getTitle()) + ("\nBook Checked Out: " + bookCheckedOut->getTitle()));
+	}
 	return output;
 }
