@@ -8,3 +8,7 @@ student 3
 student 4
 60
 student 5
+25
+johnny
+27
+johnny2
