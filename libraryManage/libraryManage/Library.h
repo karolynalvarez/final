@@ -9,11 +9,11 @@ class Library
 private:
 	std::string locationName;
 	std::vector<std::shared_ptr<Student>> allStudents;
-	std::vector<std::shared_ptr<Item>> allItems;
 public:
+	std::vector<std::shared_ptr<Item>> allItems;
 	Library(std::string);
 	~Library();
-	void returnBook(std::string);
+	void returnBook(std::shared_ptr<Item>);
 	void addStudent(std::shared_ptr<Student>);
 	void addItem(std::shared_ptr<Item>);
 	bool bookExists(std::string);
@@ -32,7 +32,6 @@ public:
 	void deleteStudent(int);
 	int getAllItemSize() { return allItems.size(); };
 	int getAllStudentSize() { return allStudents.size(); };
-
 	void printBookList();
 };
 

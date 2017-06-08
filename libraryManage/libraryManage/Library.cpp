@@ -11,10 +11,10 @@ Library::~Library()
 {
 }
 
-void Library::returnBook(std::string _title)
+void Library::returnBook(std::shared_ptr<Item> _item)
 {
 	for (int x = 0; x < allItems.size(); x++) {
-		if (_title == allItems[x]->getTitle()) {
+		if (_item->getTitle() == allItems[x]->getTitle()) {
 			allItems[x]->returnIn();
 		}
 	}

@@ -1,18 +1,16 @@
-Harry Potter
+harry potter
 A book about magic and wizardry
 J. K. Rowling
-20
-Twilight
+-1
+twilight
 A book about vampires and werewolves
 Stephanie Meyers
 30
-A Jungle Book
+a jungle book
 A book about jungles and man
 Rudyard Kipling
 40
-48 Laws of Power
+48 laws of power
 A book about gaining power
 Robert Greene
 50
-
-

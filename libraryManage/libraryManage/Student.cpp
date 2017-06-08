@@ -6,7 +6,6 @@ Student::~Student()
 void Student::checkOut(std::shared_ptr<Item> _item)
 {
 	if (bookCheckedOut == nullptr) {
-		bookQueue.push(_item);
 		bookCheckedOut = _item;
 	}
 }
@@ -14,14 +13,8 @@ void Student::checkOut(std::shared_ptr<Item> _item)
 void Student::returnBook()
 {
 	if (bookCheckedOut != nullptr) {
-		bookQueue.pop();
 		bookCheckedOut = nullptr;
 	}
-}
-
-bool Student::isQueueEmpty()
-{
-	return bookQueue.empty();
 }
  
 std::string Student::display()
