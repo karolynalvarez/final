@@ -56,9 +56,12 @@ std::string Library::displayAll()
 
 std::string Library::displayItems()
 {
-	std::string output = "\nALL ITEMS\n";
+	std::string output;
+	output += "===========================";
+	output += "\nALL ITEMS\n"; 
+	output += "===========================\n";
 	for (int x = 0; x < allItems.size(); x++) {
-		output += "\n\nITEM #" + (std::to_string(x + 1));
+		output += "\nITEM #" + (std::to_string(x + 1));
 		output += allItems[x]->display();
 	}
 	return output;
@@ -66,7 +69,10 @@ std::string Library::displayItems()
 
 std::string Library::displayStudents()
 {
-	std::string output = "ALL STUDENTS \n";
+	std::string output;
+	output += "===========================";
+	output += "\nALL STUDENTS\n";
+	output += "===========================\n";
 	for (int x = 0; x < allStudents.size(); x++) {
 		output += allStudents[x]->display();
 	}

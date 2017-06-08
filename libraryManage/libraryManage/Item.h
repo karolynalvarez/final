@@ -6,10 +6,11 @@ class Item
 protected:
 	std::string title;
 	std::string description;
+	std::string writtenBy;
 	bool checkedOut = false;
 	int checkOutId = -1;
 public:
-	Item(std::string, std::string);
+	Item(std::string, std::string, std::string);
 	~Item();
 	virtual std::string display();
 	void checkOut() { checkedOut = true; };
@@ -20,6 +21,8 @@ public:
 	};
 	void setTitle(std::string newTitle) { title = newTitle; }
 	void setDescription(std::string newDesc) { description = newDesc; }
+	std::string getDescription() { return description; }
+	std::string getWrittenBy() { return writtenBy; }
 	void setCheckOutId(int id) { checkOutId = id; };
 	int getCheckOutId() { return checkOutId; };
 	bool getStatus() { return checkedOut; };

@@ -1,4 +1,63 @@
 20
-hector
+student 1
 30
-hector2
+student 2
+40
+student 3
+50
+student 4
+60
+student 5
+70
+student 6
+80
+student 7
+90
+student 8
+100
+student 9
+110
+student 10
+120
+student 11
+130
+student 1220
+student 1
+30
+student 2
+40
+student 3
+50
+student 4
+60
+student 5
+70
+student 6
+80
+student 7
+90
+student 8
+100
+student 9
+110
+student 10
+120
+student 11
+130
+student 12
+harry potter
+A book about magic and wizardry
+J. K. Rowling
+20
+twilight
+A book about vampires and werewolves
+Stephanie Meyers
+30
+a jungle book
+A book about jungles and man
+Rudyard Kipling
+40
+48 laws of power
+A book about gaining power
+Robert Greene
+-1

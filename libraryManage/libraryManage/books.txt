@@ -1,0 +1,16 @@
+Harry Potter
+A book about magic and wizardry
+J. K. Rowling
+20
+Twilight
+A book about vampires and werewolves
+Stephanie Meyers
+30
+A Jungle Book
+A book about jungles and man
+Rudyard Kipling
+40
+48 Laws of Power
+A book about gaining power
+Robert Greene
+-1

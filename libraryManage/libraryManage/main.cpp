@@ -80,7 +80,7 @@ void saveLibrary(shared_ptr<Library> _library) {
 	static string _bookAuthor;
 	static string _checkOutId;
 
-	fileOutStudents.open("students.txt", ios::out);
+	fileOutStudents.open("students.txt", ios::out|ios::app);
 	if (fileOutStudents) {
 		cout << "\tSaving students to file...\n";
 		for (int x = 0; x < _library->getAllStudentSize(); x++) {
@@ -89,6 +89,23 @@ void saveLibrary(shared_ptr<Library> _library) {
 			fileOutStudents << student->getName() << endl;
 		}
 		cout << "\tStudents have been saved to file.\n";
+		fileOutStudents.close();
+	}
+	else {
+		cout << "\tUnable to open student file, Sorry...";
+	}
+
+	fileOutBooks.open("students.txt", ios::out|ios::app);
+	if (fileOutBooks) {
+		cout << "\tSaving books to file...\n";
+		for (int x = 0; x < _library->getAllStudentSize(); x++) {
+			auto book = _library->findItemByIndex(x);
+			fileOutBooks << book->getTitle() << endl;
+			fileOutBooks << book->getDescription() << endl;
+			fileOutBooks << book->getWrittenBy() << endl;
+			fileOutBooks << book->getCheckOutId() << endl;
+		}
+		cout << "\tBooks have been saved to file.\n";
 		fileOutStudents.close();
 	}
 	else {
@@ -233,12 +250,8 @@ void createStudent(shared_ptr<Library> _library) {
 			cout << "\nStudent Record Created...";
 		}
 		else {
-			throw "This is a duplicate id number, try a different number\n";
+			cout << "This is a duplicate id number, try a different number\n";
 		}
-	}
-	catch (string e) {
-		cout << e;
-		aminMenu(_library);
 	}
 };
 void display_alls(shared_ptr<Library> _library) {
@@ -452,37 +465,6 @@ void delete_book(shared_ptr<Library> _library) {
 		}
 };
 
-
-	/*
-	string userInput;
-string secondUserInput;
-
-cout << "Would you like to add to the library?[Y/N]" << endl;
-getline(cin, userInput);
-if (userInput == "Y" || userInput == "y") {
-addToLibrary();
-}	else if (userInput == "N" || userInput == "n") {
-cout << "Display the library?[Y/N]" << endl;
-getline(cin, secondUserInput);
-if (secondUserInput == "Y" || secondUserInput == "y") {
-newCollection.displayCollection();
-}	else if (secondUserInput == "N" || secondUserInput == "n") {
-cout << "Thanks for creating a library!" << endl;
-exit(0);
-}	else {
-cout << "Incorrect Input, Try to add something to the library again." << endl;
-start();
-}
-	*/
-
-/*
-void bookCheckout(shared_ptr<Library> _library){
-int id;
-cout << "Please Enter the 3 Digit Student ID:";
-cin >> id;
-if ( _library)
-};
-*/
 
 
 
