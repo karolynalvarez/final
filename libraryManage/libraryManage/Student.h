@@ -8,17 +8,17 @@ class Student
 {
 private:
 	std::string name;
-	int id;
+	long int id;
 	std::queue<std::shared_ptr<Item>> bookQueue;
 	std::shared_ptr<Item> bookCheckedOut = nullptr;
 public:
-	Student(std::string _name, int _id);
+	Student(std::string _name, long  int _id) : name(_name), id(_id){};
 	~Student();
-	bool hasBook() { if (bookCheckedOut == nullptr) return false; };
+	bool hasBook() { if (bookCheckedOut == nullptr) { return false; } };
 	void checkOut(std::shared_ptr<Item>);
 	void returnBook();
-	int getId() { return id; };
-	int getBookQueueSize();
+	long int getId() { return id; };
+	bool isQueueEmpty();
 	std::string display();
 	void setName(std::string _name) { name = _name; };
 	std::string getName() { return name; };

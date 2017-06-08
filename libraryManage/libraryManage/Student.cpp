@@ -1,12 +1,4 @@
 #include "Student.h"
-
-
-
-Student::Student(std::string _name, int _id): name(_name), id(_id)
-{
-}
-
-
 Student::~Student()
 {
 }
@@ -27,9 +19,9 @@ void Student::returnBook()
 	}
 }
 
-int Student::getBookQueueSize()
+bool Student::isQueueEmpty()
 {
-	return bookQueue.size();
+	return bookQueue.empty();
 }
  
 std::string Student::display()
@@ -39,7 +31,7 @@ std::string Student::display()
 		output += (("\nSTUDENT ID: " + std::to_string(id)) + ("\nNAME:" + this->getTitle() + "\n"));
 	}
 	else {
-		output += (("\nSTUDENT ID: " + std::to_string(id)) + ("\nNAME:" + this->getTitle()) + ("\nBook Checked Out: " + bookCheckedOut->getTitle()));
+		output += (("\nSTUDENT ID: " + std::to_string(id)) + ("\nNAME:" + this->getTitle()) + ("\nBook Checked Out: " + bookCheckedOut->getTitle() + "\n"));
 	}
 	return output;
 }

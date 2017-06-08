@@ -48,7 +48,7 @@ bool Library::studentExists(int _id)
 
 std::string Library::displayAll()
 { 
-	std::string output = "Welcome to your library: " + locationName;
+	std::string output = "\n\nWelcome to your library: " + locationName + "\n";
 	output += this->displayItems();
 	output += this->displayStudents();
 	return output;
@@ -57,7 +57,7 @@ std::string Library::displayAll()
 std::string Library::displayItems()
 {
 	std::string output;
-	output += "===========================";
+	output += "\n===========================";
 	output += "\nALL ITEMS\n"; 
 	output += "===========================\n";
 	for (int x = 0; x < allItems.size(); x++) {
@@ -70,7 +70,7 @@ std::string Library::displayItems()
 std::string Library::displayStudents()
 {
 	std::string output;
-	output += "===========================";
+	output += "\n===========================";
 	output += "\nALL STUDENTS\n";
 	output += "===========================\n";
 	for (int x = 0; x < allStudents.size(); x++) {
