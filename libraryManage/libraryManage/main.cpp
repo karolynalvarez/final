@@ -320,7 +320,7 @@ void bookCheckout(shared_ptr<Library> _library) {
 					auto student = _library->findStudent(num);
 					cout << "\nFound the student no.";
 					if (student->hasBook()) {
-						throw ("Student currently has a book checked out.\n");
+						throw ("\n But, this student currently has a book checked out.\n");
 					} else {
 						item->setCheckOutId(student->getId());
 						student->checkOut(item);

@@ -15,7 +15,7 @@ std::string Book::display()
 		output += ("\nBook Title: " + title);
 		output += ("\nDescription: " + description);
 		output += ("\nAuthor: " + author);
-		output += ("\nChecked Out by ID#: None, it's available\n\n");
+		output += ("\nChecked Out by ID#: None, it's available\n");
 		return output;
 	}
 	else {

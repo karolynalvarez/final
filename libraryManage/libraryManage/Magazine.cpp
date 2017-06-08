@@ -19,7 +19,7 @@ std::string Magazine::display()
 		output += ("\nMagazine Title: " + title);
 		output += ("\nDescription: " + description);
 		output += ("\nPublisher: " + publisher);
-		output += ("\nChecked Out by ID#: None, it's available");
+		output += ("\nChecked Out by ID#: None, it's available\n");
 		return output;
 	}
 	else {
