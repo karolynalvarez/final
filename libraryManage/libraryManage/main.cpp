@@ -39,9 +39,11 @@ void openBooksForLibrary(shared_ptr<Library> _library) {
 				getline(fileBeingRead2, _checkOutId);
 				auto checkOutId = std::stoi(_checkOutId);
 				auto book = make_shared<Book>(_bookTitle, _bookDescription, _bookAuthor);
-				book->setCheckOutId(checkOutId);
 				if (_library->studentExists(checkOutId)) {
-					if (_library->findStudent(checkOutId)->hasBook() == false) _library->findStudent(checkOutId)->checkOut(book);
+					if (_library->findStudent(checkOutId)->hasBook() == false) {
+						_library->findStudent(checkOutId)->checkOut(book);
+						book->setCheckOutId(checkOutId);
+					}
 				}
 				_library->addItem(book);
 			}
@@ -300,93 +302,46 @@ void modify_student(shared_ptr<Library> _library, int _id) {
 		cout << "\nSTUDENT NOT FOUND...\n";
 	}
 };
-void delete_student(shared_ptr<Library> _library) {
-	//ExcH Done
-	try {
-		int no;
-		cout << "\n\n\tPlease Enter the student number: ";
-		cin.ignore();
-		cin >> no;
-			if (_library->studentExists(no) == true) {
-				_library->deleteStudent(no);
-				cout << "\n\tStudent has been deleted\n";
-				system("pause");
-			}
-			else {
-				throw "\tStudent ID does not exist...";
-			}
-	}
-	catch (const char* msg) {
-		cerr << msg << endl;
-	}
-};
 
 void bookCheckout(shared_ptr<Library> _library) {
-	string _title;
-	cout << "\nPlease enter the book title: ";
-	cin.ignore();
-	getline(cin, _title);
-	std::transform(_title.begin(), _title.end(), _title.begin(), ::tolower);
-	if (_library->bookExists(_title) == true) {
-		auto item = _library->findItem(_title);
-		if (item->getStatus() == false) {
-			int num;
-			cout << "\nNow enter the student number who it will be assigned to:";
-			cin >> num;
-			if (_library->studentExists(num)) {
-				auto student = _library->findStudent(num);
-				cout << "\nFound the student no. Checking out book now...";
-				if (student->hasBook() == false) {
-					item->setCheckOutId(student->getId());
-					student->checkOut(item);
-					system("pause");
-				}
-				else {
-					cout << student->getName() << " currently has a book checked out.\n";
-				}
-			}
-			else {
-				cout << "This student was not found..returning to Administator Menu\n";
-				system("pause");
-			}
-		}
-		else {
-			cout << "\nSorry that book is not available!";
-			system("pause");
-		}
-	}
-	else {
-		cout << "\nCouldn't find desired book!";
-		system("pause");
-	}
-};
-void bookReturn(shared_ptr<Library> _library) {
 	try {
-		int _no;
-		cout << "\nPlease enter the student no: ";
+		string _title;
+		cout << "\nPlease enter the book title: ";
 		cin.ignore();
-		cin >> _no;
-
-		if (_library->studentExists(_no) == true) {
-			auto student = _library->findStudent(_no);
-			if (student->getTakenOutBook() != nullptr) {
-				shared_ptr<Item> bookTaken = student->getTakenOutBook();
-				bookTaken->returnIn();
-				student->returnBook();
-				cout << "\nBook returned thank you!\n\n";
-				system("pause");
+		getline(cin, _title);
+		std::transform(_title.begin(), _title.end(), _title.begin(), ::tolower);
+		if (_library->bookExists(_title) == true) {
+			auto item = _library->findItem(_title);
+			if (item->getStatus() == false) {
+				int num;
+				cout << "\nNow enter the student number who it will be assigned to:";
+				cin >> num;
+				if (_library->studentExists(num)) {
+					auto student = _library->findStudent(num);
+					cout << "\nFound the student no.";
+					if (student->hasBook()) {
+						throw ("Student currently has a book checked out.\n");
+					} else {
+						item->setCheckOutId(student->getId());
+						student->checkOut(item);
+						cout << "\nBook assigned to id: " << num << endl;
+						system("pause");
+					}
+				} else {
+					throw "This student was not found..returning to Administator Menu\n";
+				}
 			} else {
-				throw "\nThere are no books on queue for this student";
-				system("pause");
+				throw "\nSorry that book is not available to check out!";
 			}
 		} else {
-			throw "\nStudent does not exist...";
-			system("pause");
+			throw "\nCouldn't find desired book!";
 		}
 	} catch (const char* msg) {
 		cerr << msg << endl;
+		system("pause");
 	}
 };
+
 void displayAllLibrary(shared_ptr<Library> _library) { cout << _library->displayAll(); };
 
 //BASIC ADMIN FUNCTIONS STUDENT
@@ -481,6 +436,64 @@ void modify_book(shared_ptr<Library> _library) {
 	}
 	else {
 		cout << "\nITEM NOT FOUND...\n";
+	}
+};
+
+
+
+
+
+void bookReturn(shared_ptr<Library> _library) {
+	//EXH
+	try {
+		int _no;
+		cout << "\nPlease enter the student no: ";
+		cin.ignore();
+		cin >> _no;
+
+		if (_library->studentExists(_no) == true) {
+			auto student = _library->findStudent(_no);
+			if (student->getTakenOutBook() != nullptr) {
+				shared_ptr<Item> bookTaken = student->getTakenOutBook();
+				bookTaken->returnIn();
+				student->returnBook();
+				cout << "\nBook returned thank you!\n\n";
+				system("pause");
+			}
+			else {
+				throw "\nThere are no books on queue for this student";
+				system("pause");
+			}
+		}
+		else {
+			throw "\nStudent does not exist...";
+			system("pause");
+		}
+	}
+	catch (const char* msg) {
+		cerr << msg << endl;
+	}
+};
+
+
+void delete_student(shared_ptr<Library> _library) {
+	//ExcH Done
+	try {
+		int no;
+		cout << "\n\n\tPlease Enter the student number: ";
+		cin.ignore();
+		cin >> no;
+		if (_library->studentExists(no) == true) {
+			_library->deleteStudent(no);
+			cout << "\n\tStudent has been deleted\n";
+			system("pause");
+		}
+		else {
+			throw "\tStudent ID does not exist...";
+		}
+	}
+	catch (const char* msg) {
+		cerr << msg << endl;
 	}
 };
 void delete_book(shared_ptr<Library> _library) {

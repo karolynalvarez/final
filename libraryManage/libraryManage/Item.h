@@ -23,7 +23,7 @@ public:
 	void setDescription(std::string newDesc) { description = newDesc; }
 	std::string getDescription() { return description; }
 	std::string getWrittenBy() { return writtenBy; }
-	void setCheckOutId(int id) { checkOutId = id; };
+	void setCheckOutId(int id) { checkOutId = id; checkedOut = true; };
 	int getCheckOutId() { return checkOutId; };
 	bool getStatus() { return checkedOut; };
 };

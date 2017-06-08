@@ -13,7 +13,7 @@ private:
 public:
 	Student(std::string _name, long  int _id) : name(_name), id(_id){};
 	~Student();
-	bool hasBook() { if (bookCheckedOut == nullptr) { return false; } };
+	bool hasBook() { if (bookCheckedOut != nullptr) { return true; } };
 	void checkOut(std::shared_ptr<Item>);
 	void returnBook();
 	long int getId() { return id; };
