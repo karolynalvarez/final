@@ -13,9 +13,9 @@ void Student::checkOut(std::shared_ptr<Item> _item)
 
 void Student::returnBook()
 {
-	if (bookCheckedOut != NULL) {
+	if (bookCheckedOut != nullptr) {
 		bookQueue.pop();
-		bookCheckedOut = NULL;
+		bookCheckedOut = nullptr;
 	}
 }
 

@@ -33,7 +33,9 @@ void Library::addItem(std::shared_ptr<Item> _item)
 bool Library::bookExists(std::string _title)
 {
 	for (int x = 0; x < allItems.size(); x++) {
-		if (allItems[x]->getTitle() == _title) return true;
+		if (allItems[x]->getTitle() == _title) {
+			return true;
+		}
 	}
 	return false;
 }
@@ -41,7 +43,7 @@ bool Library::bookExists(std::string _title)
 bool Library::studentExists(int _id)
 {
 	for (int x = 0; x < allStudents.size(); x++) {
-		if (allStudents[x]->getId() == _id) return true;
+		if (allStudents[x]->getId() == _id) { return true; };
 	}
 	return false;
 }

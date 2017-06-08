@@ -8,3 +8,9 @@ student 3
 student 4
 60
 student 5
+-1
+johnny
+2
+karol
+3
+karolyn alvarez
