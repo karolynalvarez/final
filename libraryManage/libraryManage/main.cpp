@@ -8,7 +8,7 @@
 #include <memory>
 #include <fstream>
 
-/* UI CODE REUSED FROM http://www.cppforschool.com/project/library-management-system.html */
+/* UI CODE REUSED FROM http://www.cppforschool.com/project/library-management-system.html  also exception catch statement from tutorialpoint.com*/
 //By Karolyn Alvarez and Hector Jimenez
 //6-8-2017
 //CIS-17A Professor James Wilson
