@@ -1,14 +1,8 @@
-20
-student 1
-30
-student 2
-40
-student 3
-50
-student 4
-60
-student 5
-25
-johnny
-27
-johnny2
+1
+jack b.
+2
+carry a.
+3
+blake j.
+4
+nick w.

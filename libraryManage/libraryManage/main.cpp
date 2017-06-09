@@ -13,7 +13,7 @@
 using namespace std;
 
 //APP FUNCTIONS
-void intro();
+void intro(shared_ptr<Library>);
 void aminMenu(shared_ptr<Library>);
 
 //BASIC LIBRARY FUNCTIONS
@@ -167,10 +167,12 @@ int main() {
 	auto library = make_shared<Library>("The Reading Place");
 	openLibrary(library);
 	int ch;
-	intro();
+	intro(library);
 	do
 	{
-		cout << "\n\n\n\tMAIN MENU";
+		cout << "\n\t***************************************************************";
+		cout << "\n\tMAIN MENU";
+		cout << "\n\t***************************************************************";
 		cout << "\n\n\t01. BOOK CHECKOUT";
 		cout << "\n\n\t02. BOOK RETURN";
 		cout << "\n\n\t03. ADMINISTRATOR MENU";
@@ -192,12 +194,15 @@ int main() {
 	return 0;
 }
 
-void intro() {
+void intro(shared_ptr<Library> _library) {
 	cout << "\n\tLIBRARY MANAGEMENT SYSTEM\n";
 	cout << "\n\tMADE BY : Karolyn Alvarez & Hector Jimenez";
 	cout << "\n\tSCHOOL : NORCO COLLEGE\n";
-	cout << "\tWelcome, this tool will allow you to manage students and book.\n\n";
+	cout << "\tThis tool will allow you to manage students and books.\n\n";
 	system("pause");
+	cout << _library->displayAll() << endl;
+	cout << "\tOpening Main Menu...\n";
+
 }
 
 void aminMenu(shared_ptr<Library> _library) {
@@ -247,15 +252,17 @@ void aminMenu(shared_ptr<Library> _library) {
 	}
 };
 
-void display_alls(shared_ptr<Library> _library) {
-	cout << _library->displayStudents();
-};
 void display_sps(shared_ptr<Library> _library, int _id) {
-	if (_id == (_library->findStudent(_id)->getId()) ) {
-		cout << _library->findStudent(_id)->display();
-	}
-	else {
-		cout << "\nSTUDENT NOT FOUND...\n";
+	try {
+		if (_id == (_library->findStudent(_id)->getId())) {
+			cout << _library->findStudent(_id)->display();
+		}
+		else {
+			throw "\nSTUDENT NOT FOUND...\n";
+		}
+	} catch (const char* msg) {
+		cerr << msg << endl;
+		system("pause");
 	}
 };
 void modify_student(shared_ptr<Library> _library, int _id) {
@@ -272,67 +279,23 @@ void modify_student(shared_ptr<Library> _library, int _id) {
 };
 
 
-void displayAllLibrary(shared_ptr<Library> _library) { cout << _library->displayAll(); };
-
 //BASIC ADMIN FUNCTIONS STUDENT
-void write_book(shared_ptr<Library> _library) {
-	int ch;
-	cout << "\nWhat type of item would you like to add?\n";
-	cout << "1) Book\n";
-	cout << "2) Magazine\n";
-	cin >> ch;
-	if (ch == 1) {
-		string title, description, author;
-		cin.ignore();
-		cout << "\nNEW BOOK ENTRY...\n";
-		cout << "\nEnter the Title: ";
-		getline(cin, title);
-
-		cout << "\nEnter the Author: ";
-		getline(cin, author);
-
-		cout << "\nEnter the Description: ";
-		getline(cin, description);
-
-		auto book = make_shared<Book>(title, description, author);
-		_library->addItem(book);
-		cout << "\nBook Record Created...";
-	}
-	else if (ch == 2) {
-		string title, description, publisher;
-		cin.ignore();
-		cout << "\nNEW MAGAZINE ENTRY...\n";
-		cout << "\nEnter the Title: ";
-		getline(cin, title);
-
-		cout << "\nEnter the Publisher: ";
-		getline(cin, publisher);
-
-		cout << "\nEnter the Description: ";
-		getline(cin, description);
-
-		auto magazine = make_shared<Magazine>(title, description, publisher);
-		_library->addItem(magazine);
-		cout << "\n\nMagazine Record Created...";
-	}
-	else {
-		cout << "\nIncorrect Input..Try again.\n";
-	}
-};
-void display_allb(shared_ptr<Library> _library) {
-	cout << _library->displayItems();
-};
 void display_spb(shared_ptr<Library> _library) {
-	string _title;
-	cout << "\n\n\tPlease enter the book title: ";
-	cin.ignore();
-	getline(cin, _title);
-	std::transform(_title.begin(), _title.end(), _title.begin(), ::tolower);
-	if (_title == (_library->findItem(_title)->getTitle())) {
-		cout << _library->findItem(_title)->display();
-	}
-	else {
-		cout << "\nITEM NOT FOUND...\n";
+	try {
+		string _title;
+		cout << "\n\n\tPlease enter the book title: ";
+		cin.ignore();
+		getline(cin, _title);
+		std::transform(_title.begin(), _title.end(), _title.begin(), ::tolower);
+		if (_title == (_library->findItem(_title)->getTitle())) {
+			cout << _library->findItem(_title)->display();
+		}
+		else {
+			throw "\nITEM NOT FOUND...\n";
+		}
+	} catch (const char* msg) {
+		cerr << msg << endl;
+		system("pause");
 	}
 };
 void modify_book(shared_ptr<Library> _library) {
@@ -373,6 +336,16 @@ void modify_book(shared_ptr<Library> _library) {
 
 
 //DEBUGGED
+
+
+void displayAllLibrary(shared_ptr<Library> _library) { cout << _library->displayAll(); };
+void display_alls(shared_ptr<Library> _library) {
+	cout << _library->displayStudents();
+};
+void display_allb(shared_ptr<Library> _library) {
+	cout << _library->displayItems();
+};
+
 void createStudent(shared_ptr<Library> _library) {
 	//EXH
 	try {
@@ -412,6 +385,80 @@ void createStudent(shared_ptr<Library> _library) {
 		system("pause");
 	}
 }
+void write_book(shared_ptr<Library> _library) {
+	try {
+		int ch;
+		cout << "\nWhat type of item would you like to add?\n";
+		cout << "1) Book\n";
+		cout << "2) Magazine\n";
+		cin >> ch;
+		if (ch == 1) {
+			string title, description, author;
+			cin.ignore();
+			cout << "\nNEW BOOK ENTRY...\n";
+			cout << "\nEnter the Title: ";
+			getline(cin, title);
+
+			cout << "\nEnter the Author: ";
+			getline(cin, author);
+
+			cout << "\nEnter the Description: ";
+			getline(cin, description);
+
+			auto book = make_shared<Book>(title, description, author);
+			_library->addItem(book);
+			cout << "\nBook Record Created...";
+			string choice;
+			cout << "\nWould you like to add another item?[Y/N] :";
+			getline(cin, choice);
+			if (choice == "Y" || choice == "y") {
+				write_book(_library);
+			}
+			else if (choice == "N" || choice == "n") {
+				cout << "\nBack to main menu...";
+			}
+			else {
+				throw "\nIncorrect Input...Back to main menu.";
+			}
+		}
+		else if (ch == 2) {
+			string title, description, publisher;
+			cin.ignore();
+			cout << "\nNEW MAGAZINE ENTRY...\n";
+			cout << "\nEnter the Title: ";
+			getline(cin, title);
+
+			cout << "\nEnter the Publisher: ";
+			getline(cin, publisher);
+
+			cout << "\nEnter the Description: ";
+			getline(cin, description);
+
+			auto magazine = make_shared<Magazine>(title, description, publisher);
+			_library->addItem(magazine);
+			cout << "\n\nMagazine Record Created...";
+			string choice;
+			cout << "\nWould you like to add another item?[Y/N] :";
+			getline(cin, choice);
+			if (choice == "Y" || choice == "y") {
+				write_book(_library);
+			}
+			else if (choice == "N" || choice == "n") {
+				cout << "\nBack to main menu...";
+			}
+			else {
+				throw "\nIncorrect Input...Back to main menu.";
+			}
+		}
+		else {
+			throw "\nIncorrect Input..Try again.\n";
+		}
+	}
+	catch (const char* msg) {
+		cerr << msg << endl;
+		system("pause");
+	}
+};
 
 
 void bookReturn(shared_ptr<Library> _library) {
