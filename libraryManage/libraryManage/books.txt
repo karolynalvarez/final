@@ -7,10 +7,14 @@ A book about vampires and werewolves
 Stephanie Meyers
 2
 a jungle book
-A book about jungles and man
+a book about mongli in the jungle
 Rudyard Kipling
-3
+6
 48 laws of power
 A book about gaining power
 Robert Greene
--1
+4
+c++ objects
+a book about programming
+John Mccain
+3
